@@ -50,19 +50,13 @@ swagger.setAppHandler(app);
 
 // Add models and methods to swagger
 swagger.addModels(enviroResources.models)
-  // .addGet(enviroResources.findByTags)
-  // .addGet(enviroResources.findByStatus)
-  // .addGet(enviroResources.findById)
   .addGet(enviroResources.calculateAutoCarbonCost)
   .addGet(enviroResources.findEconData)
   .addGet(enviroResources.findDeathData)
-  // .addPost(enviroResources.addPet)
-  // .addPut(enviroResources.updatePet)
-  // .addDelete(enviroResources.deletePet);
 
 
 // Configures the app's base path and api version.
-swagger.configure("http://localhost:8002", "0.1");
+swagger.configure("http://localhost:3000", "0.1");
 
 // Serve up swagger ui at /docs via static route
 var docs_handler = express.static(__dirname + '/../../swagger-ui-1.1.7/');
@@ -77,5 +71,11 @@ app.get(/^\/docs(\/.*)?$/, function(req, res, next) {
   return docs_handler(req, res, next);
 });
 
-// Start the server on port 8002
-app.listen(8002);
+app.get('/', function(req, res, next){
+  res.redirect('/docs');
+});
+
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
