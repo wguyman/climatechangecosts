@@ -4388,7 +4388,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li.active{
 
-   border-top:11px solid #F30;
+   border-top:11px solid #2ECC71;
    opacity: 0.9;
   -webkit-transition: opacity 0.15s linear;
   -moz-transition: opacity 0.15s linear;
@@ -4428,7 +4428,7 @@ width: 5px;
   color: #333333;
   text-decoration: none;
   background-color: transparent;
-  border-top:11px solid #F30;
+  border-top:11px solid #2ECC71;
     opacity: 0.9;
   -webkit-transition: opacity 0.15s linear;
      -moz-transition: opacity 0.15s linear;

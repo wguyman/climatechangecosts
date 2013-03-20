@@ -51,6 +51,8 @@ swagger.setAppHandler(app);
 // Add models and methods to swagger
 swagger.addModels(enviroResources.models)
   .addGet(enviroResources.calculateAutoCarbonCost)
+  .addGet(enviroResources.calculateComputationCarbonCost)
+  .addGet(enviroResources.calculateDietCarbonCost)
   .addGet(enviroResources.findEconData)
   .addGet(enviroResources.findDeathData)
 

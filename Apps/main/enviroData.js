@@ -10,11 +10,18 @@ var CM1 = require('CM1');
 //Firebase data reference
 var Firebase = require('../../firebase-node');
 
-exports.getAutoCarbonCost = function getAutoCarbonCost(res, year_param, fuel, hybrid) {
+var TOTAL_CO2_2010 = 33508901000000;
+var TOTAL_COST_2010 = 1140000000000;
+
+exports.getAutoCarbonCost = function getAutoCarbonCost(res, year_param, fuel, distance, fuel_efficiency, make, model, hybrid) {
   var model = CM1.model('automobile', {
   year: year_param,
   annual_fuel_use: fuel,
-  hybridity: hybrid
+  hybridity: hybrid,
+  annual_distance: distance,
+  fuel_efficiency: fuel_efficiency,
+  make: make,
+  model: model
   });
   console.log(model);
 
@@ -22,10 +29,6 @@ exports.getAutoCarbonCost = function getAutoCarbonCost(res, year_param, fuel, hy
     if(err) return console.log('CM1 connection failed', err);
     var sendDataBack;
     var calculatedCarbon = parseInt(impacts.carbon);
-    var TOTAL_CO2_2010 = 33508901000000;
-    var TOTAL_COST_2010 = 1140000000000;
-
-
     var cost_result = (calculatedCarbon/TOTAL_CO2_2010)*TOTAL_COST_2010;
 
     console.log('Carbon for car (kgC02e): ',
@@ -33,6 +36,69 @@ exports.getAutoCarbonCost = function getAutoCarbonCost(res, year_param, fuel, hy
     console.log('Methodology: ', impacts.methodology);
     console.log("Cost result:", cost_result);
     sendDataBack = {"Carbon for car (kgC02e)": impacts.carbon,"Methodology": impacts.methodology,"Externalized Cost on the Climate in 2010 ($)": cost_result};
+
+    res.send(JSON.stringify(sendDataBack));
+  });
+
+}
+
+
+exports.getComputationCarbonCost = function getComputationCarbonCost(res, carrier, duration, date, zip_code) {
+  var model = CM1.model('computation', {
+  carrier: carrier,
+  duration: duration,
+  date: date,
+  zip_code: zip_code
+  });
+  console.log(model);
+
+  model.getImpacts(function(err, impacts) {
+    if(err) return console.log('CM1 connection failed', err);
+    var sendDataBack;
+    var calculatedCarbon = parseInt(impacts.carbon);
+    var cost_result = (calculatedCarbon/TOTAL_CO2_2010)*TOTAL_COST_2010;
+
+    console.log('Carbon for computation (kgC02e): ',
+              impacts.carbon);
+    console.log('Methodology: ', impacts.methodology);
+    console.log("Cost result:", cost_result);
+    sendDataBack = {"Carbon for computation (kgC02e)": impacts.carbon,"Methodology": impacts.methodology,"Externalized Cost on the Climate in 2010 ($)": cost_result};
+
+    res.send(JSON.stringify(sendDataBack));
+  });
+
+}
+
+
+exports.getDietCarbonCost = function getDietCarbonCost(res, start_date, end_date, red_meat_share, poultry_share, fish_share, eggs_share, nuts_share, dairy_share, cereals_and_grains_share, fruit_share, vegetables_share, oils_and_sugars_share, diet_class) {
+  var model = CM1.model('diet', {
+  start_date: start_date,
+  end_date: end_date,
+  red_meat_share: red_meat_share,
+  poultry_share: poultry_share,
+  fish_share: fish_share,
+  eggs_share: eggs_share,
+  nuts_share: nuts_share,
+  dairy_share: dairy_share,
+  cereals_and_grains_share: cereals_and_grains_share,
+  fruit_share: fruit_share,
+  vegetables_share: vegetables_share,
+  oils_and_sugars_share: oils_and_sugars_share,
+  diet_class: diet_class
+  });
+  console.log(model);
+
+  model.getImpacts(function(err, impacts) {
+    if(err) return console.log('CM1 connection failed', err);
+    var sendDataBack;
+    var calculatedCarbon = parseInt(impacts.carbon);
+    var cost_result = (calculatedCarbon/TOTAL_CO2_2010)*TOTAL_COST_2010;
+
+    console.log('Carbon for diet (kgC02e): ',
+              impacts.carbon);
+    console.log('Methodology: ', impacts.methodology);
+    console.log("Cost result:", cost_result);
+    sendDataBack = {"Carbon for diet (kgC02e)": impacts.carbon,"Methodology": impacts.methodology,"Externalized Cost on the Climate in 2010 ($)": cost_result};
 
     res.send(JSON.stringify(sendDataBack));
   });

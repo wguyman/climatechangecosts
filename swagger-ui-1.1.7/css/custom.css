@@ -112,7 +112,7 @@ nav.primary ul li a:hover {
 
 .header{ padding:0px;}
 
-.callout{background:#f30; padding:60px 0;}
+.callout{background:#2ECC71; padding:60px 0;}
 .section{padding:4.5% 0; border-bottom: 1px solid #CCC;}
 
 .companycallout{ margin-bottom:20px;}
@@ -149,7 +149,7 @@ h2.explain{line-height:34px;}
 /*CONTACT*/
 .contact{}
 #contact{padding-top:80px; padding-bottom:80px;}
-#contact h2, .apih2, #about h2,#portfolio h2{font-weight:200; text-align: center; font-size:3em; color: #f30; text-transform:uppercase; line-height:2em;}
+#contact h2, .apih2, #about h2,#portfolio h2{font-weight:200; text-align: center; font-size:3em; color: #2ECC71; text-transform:uppercase; line-height:2em;}
 
 
 /*CONTACT Map*/
