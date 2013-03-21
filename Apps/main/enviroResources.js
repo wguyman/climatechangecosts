@@ -105,7 +105,7 @@ exports.calculateDietCarbonCost = {
     "description" : "Calculate the climate change cost of producing the food a person eats.",
     "path" : "/diet.{format}",
     "notes" : "The diet model calculates the carbon footprint of producing the food a person eats (In Grams). Built on a foundation of economic, environmental, and diet-related data from government and research institutions, it uses personal diet information to calculate an annual food footprint. It takes into account the full supply chain including cultivation, processing, packaging, transport, storage, and retail, to provide an accurate carbon score. Data from BrighterPlanet.",
-    "summary" : "Calculate the cost of one's diet.",
+    "summary" : "Calculate the carbon cost of one's diet.",
     "method": "GET",
     "params" : [param.query("start_date", "Start Date of Diet (YYYY-MM-DD)", "string",false), 
                 param.query("end_date", "End Date of Diet (YYYY-MM-DD)", "string", false),
@@ -139,5 +139,41 @@ exports.calculateDietCarbonCost = {
     var oils_and_sugars_share = url.parse(req.url,true).query["oils_and_sugars_share"];
     var diet_class = url.parse(req.url,true).query["diet_class"];
     enviroData.getDietCarbonCost(res, start_date, end_date, red_meat_share, poultry_share, fish_share, eggs_share, nuts_share, dairy_share, cereals_and_grains_share, fruit_share, vegetables_share, oils_and_sugars_share, diet_class);
+  }
+};
+
+exports.calculateFlightCarbonCost = {
+  'spec': {
+    "description" : "Calculate the climate change cost of flying.",
+    "path" : "/flight.{format}",
+    "notes" : "The flight model calculates the carbon footprint of a passenger's air travel. It's designed to integrate with travel industry and business management systems. With calculations based on extensive airline industry datasets, the model adaptively finds the optimum calculation pathway based on the information provided, and fills any data holes with dynamic averages. Data from BrighterPlanet.",
+    "summary" : "Calculate the carbon cost of flying.",
+    "method": "GET",
+    "params" : [param.query("date", "Date of Flight (YYYY-MM-DD)", "string",false), 
+                param.query("segments_per_trip", "Number of Segments in Trip", "string", false),
+                param.query("trips", "# of trips", "string", false), 
+                param.query("seats", "# of seats", "string", false),
+                param.query("distance_estimate", "Estimated Trip Distance (km)", "string", false),
+                param.query("origin_airport", "Airport Origin (abbreviation or name)", "string", false),
+                param.query("destination_airport", "Destination Airport", "string", false),
+                param.query("aircraft", "Type of Aircraft", "string", false),
+                param.query("airline", "Airliner", "string", false),
+                param.query("seat_class", "The Class you were Flying (e.g. Business)", "string", false),
+                ],
+    "nickname" : "getFlightCost"
+  },
+  'action': function (req,res) {
+    
+    var date = url.parse(req.url,true).query["date"];
+    var segments_per_trip = url.parse(req.url,true).query["segments_per_trip"];
+    var trips = url.parse(req.url,true).query["trips"];
+    var seats = url.parse(req.url,true).query["seats"];
+    var distance_estimate = url.parse(req.url,true).query["distance_estimate"];
+    var origin_airport = url.parse(req.url,true).query["origin_airport"];
+    var destination_airport = url.parse(req.url,true).query["destination_airport"];
+    var aircraft = url.parse(req.url,true).query["aircraft"];
+    var airline = url.parse(req.url,true).query["airline"];
+    var seat_class = url.parse(req.url,true).query["seat_class"];
+    enviroData.getFlightCarbonCost(res, date, segments_per_trip, trips, seats, distance_estimate, origin_airport, destination_airport, aircraft, airline, seat_class);
   }
 };

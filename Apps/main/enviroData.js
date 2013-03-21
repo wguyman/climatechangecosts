@@ -105,6 +105,39 @@ exports.getDietCarbonCost = function getDietCarbonCost(res, start_date, end_date
 
 }
 
+
+exports.getFlightCarbonCost = function getFlightCarbonCost(res, date, segments_per_trip, trips, seats, distance_estimate, origin_airport, destination_airport, aircraft, airline, seat_class) {
+  var model = CM1.model('flight', {
+  date: date,
+  segments_per_trip: segments_per_trip,
+  trips: trips,
+  seats: seats,
+  distance_estimate: distance_estimate,
+  origin_airport: origin_airport,
+  destination_airport: destination_airport,
+  aircraft: aircraft,
+  airline: airline,
+  seat_class: seat_class
+  });
+  console.log(model);
+
+  model.getImpacts(function(err, impacts) {
+    if(err) return console.log('CM1 connection failed', err);
+    var sendDataBack;
+    var calculatedCarbon = parseInt(impacts.carbon);
+    var cost_result = (calculatedCarbon/TOTAL_CO2_2010)*TOTAL_COST_2010;
+
+    console.log('Carbon for flight (kgC02e): ',
+              impacts.carbon);
+    console.log('Methodology: ', impacts.methodology);
+    console.log("Cost result:", cost_result);
+    sendDataBack = {"Carbon for flight (kgC02e)": impacts.carbon,"Methodology": impacts.methodology,"Externalized Cost on the Climate in 2010 ($)": cost_result};
+
+    res.send(JSON.stringify(sendDataBack));
+  });
+
+}
+
 exports.getEconData = function getEconData(res, country, climateOrCarbon) {
   var enviroRef = new Firebase('https://enviro.firebaseio.com/econ');
   var resultingDataRef;

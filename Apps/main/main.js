@@ -53,6 +53,7 @@ swagger.addModels(enviroResources.models)
   .addGet(enviroResources.calculateAutoCarbonCost)
   .addGet(enviroResources.calculateComputationCarbonCost)
   .addGet(enviroResources.calculateDietCarbonCost)
+  .addGet(enviroResources.calculateFlightCarbonCost)
   .addGet(enviroResources.findEconData)
   .addGet(enviroResources.findDeathData)
 
