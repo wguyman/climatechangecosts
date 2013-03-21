@@ -59,7 +59,7 @@ swagger.addModels(enviroResources.models)
 
 
 // Configures the app's base path and api version.
-swagger.configure("http://localhost:3000", "0.1");
+swagger.configure("http://climatechangecosts.herokuapp.com", "0.1");
 
 // Serve up swagger ui at /docs via static route
 var docs_handler = express.static(__dirname + '/../../swagger-ui-1.1.7/');
