@@ -1,22 +1,12 @@
 {
   "name": "economicsOfEnvironment",
   "version": "1.2.3",
-  "author": {
-    "name": "Will Guyman",
-    "email": "wguyman@gmail.com",
-  },
-  "description": "Calculate the true cost of Climate Change.",
-  "main": "index.js",
-  "directories": {
-    "lib": "./Common/node"
-  },
-  "engines": {
-    "node": ">= 0.8.x"
-  },
+  "description": "Calculate the true cost of Climate Change",
   "dependencies": {
     "connect": ">= 1.8.x",
     "express": "3.x",
-    "docco": "0.4.x"
-  },
-  "license": "apache 2.0"
+    "docco": "0.4.x",
+    "CM1":  "0.7.6",
+    "faye-websocket": "0.4.x"
+  }
 }
