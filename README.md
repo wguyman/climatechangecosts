@@ -4,8 +4,9 @@ One of the better arguments against taking serious action on climate change has 
 
 Check out the full report here: http://daraint.org/climate-vulnerability-monitor/climate-vulnerability-monitor-2012/
 
+Check out the implimented API at www.climatechangecosts.com
+
 ##Trillons of dollars at stake. 
 
-Use this API to get the data and calculate your own carbon use + externalized cost. 
-
+Use this API to get the data and calculate your own carbon use + externalized cost. Think of this "externalized cost" as that hidden tax you are effetively paying thanks to climate change costs. 
 
